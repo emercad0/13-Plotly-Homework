@@ -28,7 +28,7 @@ Use Plotly.js to build interactive charts for your dashboard.
 
   * Use `otu_labels` for the text values
 
-  ![Bubble Chart](Images/bubble_chart.png)
+  
 
 * Display the sample metadata from the route `/metadata/<sample>`
 
@@ -59,7 +59,7 @@ The following task is completely optional and is very advanced.
 
 * Update the chart whenever a new sample is selected
 
-![Weekly Washing Frequency Gauge](Images/gauge.png)
+
 
 - - -
 

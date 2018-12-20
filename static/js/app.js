@@ -118,5 +118,5 @@ function optionChanged(newSample) {
 
 // Initialize the dashboard
 init();
-
+optionChanged("BB_940")
 

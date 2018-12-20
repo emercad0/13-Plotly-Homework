@@ -5,7 +5,6 @@ function buildMetadata(sample) {
   // Use `d3.json` to fetch the metadata for a sample
     // Use d3 to select the panel with id of `#sample-metadata`
 
-    var sample = d3.select("#selDataset").property("value");
     var panel = d3.select("#sample-metadata");
 
     d3.json(`/metadata/${sample}`).then(function (data) {
@@ -72,8 +71,12 @@ function buildCharts(sample) {
       hovertext: otu_labels.slice(0, 10),
       hoverinfo: "label+text+value+percent",
       textinfo: "percent",
-      type: "pie"
+      type: "pie",
+      marker: {
+        color: otu_ids,
+        colorscale: "Viridis"}
     }];
+    
 
     Plotly.newPlot("pie", pieData, pieLayout);
 
@@ -90,23 +93,26 @@ function init() {
     selector.selectAll("option").data(samples)
     .enter()
     .append("option")
-    .text(function (d) 
+    .text(function (data)
     {
-      return d; 
+      return data;
     })
-    .property("value", function (d) 
+    .property("value", function (data) 
     {
-      return d; 
+      return data;
     })
     console.log(samples[0]);
-  });
+  }).then(function (){
   
 
   // Use the first sample from the list to build the initial plots
-  //const firstSample = samples[0]
-    const firstSample = selector.property("value");
-    buildCharts(firstSample);
-    buildMetadata(firstSample);
+  //const firstSample = sampleNames[0]
+  const firstSample = selector.property("value");
+  console.log(firstSample);
+   // buildCharts(firstSample);
+   // buildMetadata(firstSample);
+   optionChanged(firstSample)
+    })
 }
 
 function optionChanged(newSample) {
@@ -118,5 +124,4 @@ function optionChanged(newSample) {
 
 // Initialize the dashboard
 init();
-optionChanged("BB_940")
 
